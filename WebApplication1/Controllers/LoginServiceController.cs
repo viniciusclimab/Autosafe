@@ -10,8 +10,8 @@ namespace WebApplication1.Controllers
     public class LoginServiceController : ApiController
     {
         
-        private readonly LoginModel[] login = new LoginModel[] {
-        new LoginModel {usuario_id = 1, cpf = "124", senha = "134",tipoperfil = 1 } };
+        //private readonly LoginModel[] login = new LoginModel[] {
+       // new LoginModel {usuario_id = 1, cpf = "124", senha = "134",tipoperfil = 1 } };
         
 
         // GET: api/LoginService
@@ -22,16 +22,18 @@ namespace WebApplication1.Controllers
         }
         */
         // GET: api/LoginService/5
-        public LoginModel[]  Get(string cpf, string senha)
+        public LoginModel  Get(string cpf, string senha)
         {
 
             return Post(cpf, senha);
         }
 
         // POST: api/LoginService
-        public LoginModel[] Post([FromBody]string cpf, string senha)
+        public LoginModel Post(string cpf, string senha)
         {
-            return login;
+   
+            Models.LoginEspecialista logesp = new LoginEspecialista();
+            return logesp.getLogin(cpf, senha);
 
         }
         /*

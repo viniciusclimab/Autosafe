@@ -7,12 +7,9 @@ namespace WebApplication1.Models
 {
     public class LoginModel
     {
-        public string cpf { get; set; }
-        public int usuario_id { get; set; }
-        public string  senha { get; set; }
-        public int  tipoperfil { get; set; }
-        public string  nome { get; set; }
-
-
+        public int tiporetorno { get; set; }
+        public string nome { get; set; }
+        public string email { get; set; }
+        public DateTime datafim { get; set; }
     }
 }

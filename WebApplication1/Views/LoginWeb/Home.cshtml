@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+    </head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Cadastrar Atendente</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cadastrar Oficina<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Consultar Chamados</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Relatórios</a>
+                    </li>
+
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    </body>
+</html>

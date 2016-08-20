@@ -7,9 +7,11 @@ namespace WebApplication1.Models
 {
     public class LoginModel
     {
-        public int tiporetorno { get; set; }
-        public string nome { get; set; }
-        public string email { get; set; }
-        public DateTime datafim { get; set; }
+        public List<VeiculoModel> listaveiculos = new List<VeiculoModel>();
+        public List<ApoliceModel> apolicemodel = new List<ApoliceModel>();
+        public List<DependenteModel> dependentemodel = new List<DependenteModel>();
+        public List<ClienteModel> clientemodel = new List<ClienteModel>();
+        public List<ClienteDependenteModel> clientedep = new List<ClienteDependenteModel>();
+        public int StatusRetorno { get; set; }
     }
 }

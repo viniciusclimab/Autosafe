@@ -203,12 +203,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -237,20 +236,33 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AtendenteController.cs" />
+    <Compile Include="Controllers\ChamadoServiceController.cs" />
+    <Compile Include="Controllers\EsqueceuSenhaServiceController.cs" />
     <Compile Include="Controllers\LoginServiceController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DAO\DadosBanco.cs" />
+    <Compile Include="Controllers\LoginWebController.cs" />
+    <Compile Include="Controllers\OficinaService.cs" />
+    <Compile Include="Controllers\OficinaServiceController.cs" />
+    <Compile Include="DAO\ChamadosDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\OficinaDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApoliceModel.cs" />
+    <Compile Include="Models\Atendente.cs" />
+    <Compile Include="Models\ChamadoEspecialista.cs" />
+    <Compile Include="Models\ChamadoModel.cs" />
+    <Compile Include="Models\ClienteDependenteModel.cs" />
+    <Compile Include="Models\ClienteModel.cs" />
+    <Compile Include="Models\DependenteModel.cs" />
     <Compile Include="Models\LoginEspecialista.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ObjetoTerceiros.cs" />
+    <Compile Include="Models\OficinaEspecialista.cs" />
+    <Compile Include="Models\OficinaModel.cs" />
+    <Compile Include="Models\Servicos.cs" />
+    <Compile Include="Models\VeiculoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -258,8 +270,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\metisMenu.min.css" />
+    <Content Include="Content\sb-admin-2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -289,20 +306,35 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\autosafe.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\metisMenu.min.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -311,18 +343,16 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\LoginWeb\Index.cshtml" />
+    <Content Include="Views\LoginWeb\Home.cshtml" />
+    <Content Include="Views\LoginWeb\HomeOficina.cshtml" />
+    <Content Include="Views\LoginWeb\EsqueceuSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Atendente\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

@@ -52,8 +52,11 @@ namespace WebApplication1.DAO
         {
             try
             {
-                var query = @"INSERT INTO ";
-
+                var query = @"INSERT INTO chamadoterceirosenvolvidos values('{0}','{1}','{2}','{3}',
+                              {4},'{5}','{6}','{7}',{8}";
+                query = string.Format(query, partenvolvida, ruaav, bairro, cidade, numero, sentidovia, modeloterc, placaterc, chamado_id);
+                SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.Text, null);
+                
             }
 
             catch(Exception ex)

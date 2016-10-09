@@ -1,56 +1,91 @@
-﻿
-@{
-    ViewBag.Title = "Home";
-}
-<!DOCTYPE html>
-<html lang="pt-br">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-    </head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Home</title>
+   <link rel="shortcut icon" href="favicon.png">
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/Content/data/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/Content/data/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        
+  <nav class=" indigo darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="principal.html"  class="brand-logo">Auto Safe <i class="material-icons">directions_car</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"> <i class="material-icons">person_pin</i> Atendente</a></li>
+		<li><a href="#"><i class="material-icons">build</i>Oficina</a></li>
+		<li><a href="#"><i class="material-icons">assignment</i>Chamados</a></li>
+		<li><a href="#"><i class="material-icons">assessment</i>Relatórios</a></li>
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Cadastrar Atendente</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cadastrar Oficina<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Consultar Chamados</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Relatórios</a>
-                    </li>
 
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
+
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+         <li><a href="#">Atendente</a></li>
+		<li><a href="#">Oficina</a></li>
+		<li><a href="#">Chamados</a></li>
+		<li><a href="#">Relatórios</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+	 
+          
     </div>
+  </nav>
+  
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container" >
+	<body background="/Content/data/bk.jpg"> 
+
+      <br><br>
+	  
+	  
+	 
+
+  
+    </div>
+  </div>
+
+  <footer class="page-footer indigo darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Auto Safe</h5>
+          <p class="grey-text text-lighten-4">Serviço de Integração de Seguradora.</p>
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    </body>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Configurações</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Sair</a></li>
+            <li><a class="white-text" href="#!">Alterar Senha</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contato</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Fale Conosco</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container"> 
+      © 2016 <a class="blue-text text-lighten-3" href="#!"> Auto Safe </a> - Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/Content/data/js/materialize.js"></script>
+  <script src="/Content/data/js/init.js"></script>
+
+  </body>
 </html>

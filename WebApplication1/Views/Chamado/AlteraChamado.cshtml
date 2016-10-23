@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Home</title>
+    <link rel="shortcut icon" href="favicon.png">
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/Content/data/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="/Content/data/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <nav class=" indigo darken-4" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="principal.html" class="brand-logo">Auto Safe <i class="material-icons">directions_car</i></a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="@Url.Action("Index","Chamado")"> <i class="material-icons"> assignment </i> Chamados</a></li>
+                <li><a href="@Url.Action("Index","Sla")"><i class="material-icons">person-pin</i>Cadastrar SLA</a></li>
+                <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown1">
+                        Relatórios<i class="material-icons right">
+                            assessment
+                        </i>
+                    </a>
+                </li>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="@Url.Action("OpiniaoOficina","Report")">Relatório de Opinião das Oficinas</a></li>
+                    <li><a href="@Url.Action("SlaChamados","Report")">Relatório de Chamados x SLA </a></li>
+                    <li><a href="@Url.Action("TempoChamado","Report")">Relatório de Tenpo de Chamado</a></li>
+                </ul>
+
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        </div>
+    </nav>
+
+    <div class="login-panel panel panel-default">
+        <div class="panel-heading ">
+            
+            <h3 class="panel-title">Auto Safe</h3>
+            <blockquote>
+                Insira as informações solici.
+            </blockquote>
+            <div class="panel-body">
+
+
+                <div class="row">
+                    <form class="col s12" action="@Url.Action("EnviaOficina","Chamado")" method="post" >
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputBo" name="inputBo" />
+                                    <label for="inputBo">Boletim  Ocorrência</label>
+                                </p>
+
+                            </div>
+                            <div class="input-field col s6">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputCompRes" name="inputCompRes" />
+                                    <label for="inputCompRes">Comprovante de Residência</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputCnh" name="inputCnh" />
+                                    <label for="inputCnh">Carteira de Nacional de Habilitação</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputLiberaEletrica" name="inputLiberaEletrica" />
+                                    <label for="inputLiberaEletrica">Liberar Elétrica</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputLiberaMecanica" name="inputLiberaMecanica" />
+                                    <label for="inputLiberaMecanica">Liberar Mecânica</label>
+                                </p>
+                            </div>                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p>
+                                    <input type="checkbox" class="filled-in" id="inputLiberarFunilaria" name="inputLiberarFunilaria" />
+                                    <label for="inputLiberarFunilaria">Liberar Funilaria</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <p>
+                                    <textarea id="taEletrica" class="materialize-textarea" name="taEletrica"></textarea>
+                                    <label for="taEletrica">Insira as informações de Elétrica</label>
+                                </p>
+                            </div>
+                            <div class="input-field col s6">
+                                <p>
+                                    <textarea id="taMecania" class="materialize-textarea" name="taMecania"></textarea>
+                                    <label for="taMecania">Insira as informações de Mecânica</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <p>
+                                    <textarea id="taFunilaria" class="materialize-textarea" name="taFunilaria"></textarea>
+                                    <label for="taFunilaria">Insira as informações de Funilaria</label>
+                                </p>
+                            </div>
+
+                            <div class=" row">
+
+                                <div class="input-field col s6">
+
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                        Enviar para Oficina
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+
+                            </div>
+                    </form>
+                    <div class="input-field col s6">
+                        <button class="btn waves-effect waves-light" type="submit" onclick="@Url.Action("Cancelar","Chamado")" name="cancel">
+                            Cancelar chamado
+                            <i class="material-icons">do_not_disturb_on</i>
+
+                        </button>
+                    </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+    </div>
+
+
+  <footer class="page-footer indigo darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Auto Safe</h5>
+                    <p class="grey-text text-lighten-4">Serviço de Integração de Seguradora.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Configurações</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Sair</a></li>
+                        <li><a class="white-text" href="#!">Alterar Senha</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Contato</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Fale Conosco</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 <a class="blue-text text-lighten-3" href="#!"> Auto Safe </a> - Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/Content/data/js/materialize.js"></script>
+    <script src="/Content/data/js/init.js"></script>
+
+</body>
+</html>

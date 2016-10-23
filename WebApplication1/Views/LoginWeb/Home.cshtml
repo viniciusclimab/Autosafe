@@ -12,26 +12,23 @@
   <link href="/Content/data/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+    
   <nav class=" indigo darken-4" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="principal.html"  class="brand-logo">Auto Safe <i class="material-icons">directions_car</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#"> <i class="material-icons">person_pin</i> Atendente</a></li>
-		<li><a href="#"><i class="material-icons">build</i>Oficina</a></li>
-		<li><a href="#"><i class="material-icons">assignment</i>Chamados</a></li>
-		<li><a href="#"><i class="material-icons">assessment</i>Relatórios</a></li>
+    
+        <ul class="right hide-on-med-and-down">
+        <li><a href="@Url.Action("Index","Chamado")"> <i class="material-icons"> assignment </i> Chamados</a></li>
+		<li><a href="@Url.Action("Index","Sla")"><i class="material-icons">person-pin</i>Cadastrar SLA</a></li>
+       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Relatórios<i class="material-icons right">
+       assessment</i></a></li>
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="@Url.Action("OpiniaoOficina","Report")">Relatório de Opinião das Oficinas</a></li>
+                <li><a href="@Url.Action("SlaChamados","Report")">Relatório de Chamados x SLA </a></li>
+                <li><a href="@Url.Action("TempoChamado","Report")">Relatório de Tenpo de Chamado</a></li>
+            </ul>
 
-
-
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-         <li><a href="#">Atendente</a></li>
-		<li><a href="#">Oficina</a></li>
-		<li><a href="#">Chamados</a></li>
-		<li><a href="#">Relatórios</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-	 
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
           
     </div>
   </nav>

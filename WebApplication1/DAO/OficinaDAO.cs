@@ -24,9 +24,9 @@ namespace WebApplication1.DAO
         public DataTable GetOficinaAtivas()
         {
             try {
-                var query = @"select oficina_id,razaosocial,nomefantasia,estado,cidade,bairro,endereco as rua ,numero,
-                                 cep,telefoneprincipal,horariofuncionamento
-                         from oficina where isativa = 1 ";
+                var query = "select oficina_id,razaosocial,nomefantasia,estado,cidade,bairro,endereco as rua ,numero,cep,telefoneprincipal,horariofuncionamento" +
+                            ", email from oficina where isativa = 1 ;";
+
 
                 return SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text,query, null);
 
@@ -43,10 +43,11 @@ namespace WebApplication1.DAO
         {
             try
             {
-                var query = string.Format(@"select co.notaoficina, co.descrissaoOficina from oficinaservicos as os
+                var query = @"select co.notaoficina, co.descrissaoOficina from oficinaservicos as os
                                             Inner Join chamadoopiniao as co
                                             on co.chamado_id = os.chamado_id
-                                            where os.oficina_id = {0} ", oficina_id);
+                                            where os.oficina_id = {0} ";
+                query = string.Format(query, oficina_id);
 
                 return SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text, query, null);
 
@@ -75,6 +76,8 @@ namespace WebApplication1.DAO
                 throw;
             }
         }
+
+        
  
     }
 }

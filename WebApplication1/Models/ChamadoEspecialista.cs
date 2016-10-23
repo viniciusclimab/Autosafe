@@ -1,14 +1,16 @@
 ﻿using System.Data;
+using System.Collections.Generic;
 using System;
 using WebApplication1.DAO;
 namespace WebApplication1.Models
 {
     public class ChamadoEspecialista
     {
+        ChamadosDAO chamadodao = new ChamadosDAO();
         public string insereChamado(Models.ChamadoModel objetochamado)
         {
             var msg = string.Empty;
-            ChamadosDAO chamadodao = new ChamadosDAO();
+            
             var dt = chamadodao.insChamado(objetochamado.Apolice_id, objetochamado.DocumentoCondutor, objetochamado.PartesVeic,
                 objetochamado.RuaAvenida, objetochamado.Bairro, objetochamado.Cidade, objetochamado.Numero,
                 objetochamado.veiculolocomove, objetochamado.datahorachamado, objetochamado.descchamado, objetochamado.obschamado
@@ -36,5 +38,180 @@ namespace WebApplication1.Models
             return "";
         }
 
+        public List<ChamadoModelExibicao> ConsultaChamado(int id)
+        {
+            var list = new List<ChamadoModelExibicao>();
+            var dt = new DataTable();
+            if (id == 0)
+            {
+                dt = chamadodao.GetChamados();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+
+                    var objetoList = new ChamadoModelExibicao
+                    {
+                        NomeCliente = dt.Rows[i]["NOME"].ToString(),
+                        Modelo = dt.Rows[i]["MODELO"].ToString(),
+                        NumApolice = Int32.Parse(dt.Rows[i]["APOLICE_ID"].ToString()),
+                        NumSinistro = Int32.Parse(dt.Rows[i]["CHAMADO_ID"].ToString()),
+                        Placa = dt.Rows[i]["PLACA"].ToString(),
+                        Status = dt.Rows[i]["STATUS"].ToString(),
+                        DataHoraChamado = dt.Rows[i]["DATAHORAACIDENTE"].ToString(),
+                        veiclocomove = bool.Parse(dt.Rows[i]["VEICULOSELOCOMOVE"].ToString())
+                    };
+
+                    if (i < 2)
+                    {
+                        objetoList.Prioridade = 3;
+                    }
+                    else if (i < 5)
+                    {
+                        objetoList.Prioridade = 2;
+                    }
+                    else
+                    {
+                        objetoList.Prioridade = 1;
+                    }
+                    list.Add(objetoList);
+                }
+
+            }
+            else
+            {
+                dt = chamadodao.GetChamadosById(id);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                   
+                    var objetoList = new ChamadoModelExibicao
+                    {
+                        DeescricaoChamado = dt.Rows[i]["DESCRISSAOCHAMADO"].ToString(),
+                        Endereco = "Rua: " + dt.Rows[i]["RUAAVENIDA"].ToString() +
+                        ", Bairro: "+ dt.Rows[i]["BAIRRO"].ToString() + "Nº "+ dt.Rows[i]["NUMERO"].ToString()
+                        ,CidadeEstado = "Cidade: "+ dt.Rows[i]["ESTADO"].ToString(),
+                        ObservacaoChamado = dt.Rows[i]["OBSERVACAO"].ToString(),
+                        DataHoraAberturaChamado = dt.Rows[i]["DATAHORAABERTURACHAMADO"].ToString(),
+                        PartesVeiculoColidida = dt.Rows[i]["PARTESDOVEICULOCOLIDIDA"].ToString(),
+                        quantveic = Int32.Parse(dt.Rows[i]["QUANTIDADETERCEIROSENVOLVIDOS"].ToString()),
+                        BoEnviado = bool.Parse(dt.Rows[i]["COPIABO"].ToString()),
+                        CnhEnviada = bool.Parse(dt.Rows[i]["COPIACNHENVIADA"].ToString()),
+                        CompEnd = bool.Parse(dt.Rows[i]["COPIACOMPENDERECO"].ToString()),
+                        Chassi = dt.Rows[i]["CHASSI"].ToString(),
+                        RG = dt.Rows[i]["RG"].ToString(),
+                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        NomeCliente = dt.Rows[i]["NOME"].ToString(),
+                        Modelo = dt.Rows[i]["MODELO"].ToString(),
+                        NumApolice = Int32.Parse(dt.Rows[i]["APOLICE_ID"].ToString()),
+                        NumSinistro = Int32.Parse(dt.Rows[i]["CHAMADO_ID"].ToString()),
+                        Placa = dt.Rows[i]["PLACA"].ToString(),
+                        Status = dt.Rows[i]["STATUS"].ToString(),
+                        DataHoraChamado = dt.Rows[i]["DATAHORAACIDENTE"].ToString(),
+                        veiclocomove = bool.Parse(dt.Rows[i]["VEICULOSELOCOMOVE"].ToString())
+                    };
+
+                    if (i < 2)
+                    {
+                        objetoList.Prioridade = 3;
+                    }
+                    else if (i < 5)
+                    {
+                        objetoList.Prioridade = 2;
+                    }
+                    else
+                    {
+                        objetoList.Prioridade = 1;
+                    }
+                    list.Add(objetoList);
+                }
+
+            }
+            return list;
+        }
+        public List<ChamadoModelExibicao> AlteraChamado(int id)
+        {
+            var list = new List<ChamadoModelExibicao>();
+            var dt = new DataTable();
+               
+               dt = chamadodao.GetChamadosById(id);
+            int i = 0;
+                    var objetoList = new ChamadoModelExibicao
+                    {
+                        DeescricaoChamado = dt.Rows[i]["DESCRISSAOCHAMADO"].ToString(),
+                        Endereco = "Rua: " + dt.Rows[i]["RUAAVENIDA"].ToString() +
+                        ", Bairro: " + dt.Rows[i]["BAIRRO"].ToString() + "Nº " + dt.Rows[i]["NUMERO"].ToString()
+                        ,
+                        CidadeEstado = "Cidade: " + dt.Rows[i]["ESTADO"].ToString(),
+                        ObservacaoChamado = dt.Rows[i]["OBSERVACAO"].ToString(),
+                        DataHoraAberturaChamado = dt.Rows[i]["DATAHORAABERTURACHAMADO"].ToString(),
+                        PartesVeiculoColidida = dt.Rows[i]["PARTESDOVEICULOCOLIDIDA"].ToString(),
+                        quantveic = Int32.Parse(dt.Rows[i]["QUANTIDADETERCEIROSENVOLVIDOS"].ToString()),
+                        BoEnviado = bool.Parse(dt.Rows[i]["COPIABO"].ToString()),
+                        CnhEnviada = bool.Parse(dt.Rows[i]["COPIACNHENVIADA"].ToString()),
+                        CompEnd = bool.Parse(dt.Rows[i]["COPIACOMPENDERECO"].ToString()),
+                        Chassi = dt.Rows[i]["CHASSI"].ToString(),
+                        RG = dt.Rows[i]["RG"].ToString(),
+                        CPF = dt.Rows[i]["CPF"].ToString(),
+                        NomeCliente = dt.Rows[i]["NOME"].ToString(),
+                        Modelo = dt.Rows[i]["MODELO"].ToString(),
+                        NumApolice = Int32.Parse(dt.Rows[i]["APOLICE_ID"].ToString()),
+                        NumSinistro = Int32.Parse(dt.Rows[i]["CHAMADO_ID"].ToString()),
+                        Placa = dt.Rows[i]["PLACA"].ToString(),
+                        Status = "Em Análise",
+                        DataHoraChamado = dt.Rows[i]["DATAHORAACIDENTE"].ToString(),
+                        veiclocomove = bool.Parse(dt.Rows[i]["VEICULOSELOCOMOVE"].ToString())
+                    };
+                    list.Add(objetoList);
+            var dtant = DateTime.Parse(objetoList.DataHoraChamado);
+            var dtatu = DateTime.Now;
+            TimeSpan span = Convert.ToDateTime(dtatu) - Convert.ToDateTime(dtant);
+            var quantmin = span.Minutes;
+            chamadodao.AtualizaChamado(objetoList.NumSinistro, 2,dtant,dtatu, quantmin.ToString(),1);
+            
+            return list;
+        }
+        public List<ChamadoModelExibicao> AlteraChamadoOficina(Models.ChamadoOficinaModel cm)
+        {
+            var list = new List<ChamadoModelExibicao>();
+            var dt = new DataTable();
+
+            dt = chamadodao.GetChamadosById(7);
+            int i = 0;
+            var objetoList = new ChamadoModelExibicao
+            {
+                DeescricaoChamado = dt.Rows[i]["DESCRISSAOCHAMADO"].ToString(),
+                Endereco = "Rua: " + dt.Rows[i]["RUAAVENIDA"].ToString() +
+                ", Bairro: " + dt.Rows[i]["BAIRRO"].ToString() + "Nº " + dt.Rows[i]["NUMERO"].ToString()
+                ,
+                CidadeEstado = "Cidade: " + dt.Rows[i]["ESTADO"].ToString(),
+                ObservacaoChamado = dt.Rows[i]["OBSERVACAO"].ToString(),
+                DataHoraAberturaChamado = dt.Rows[i]["DATAHORAABERTURACHAMADO"].ToString(),
+                PartesVeiculoColidida = dt.Rows[i]["PARTESDOVEICULOCOLIDIDA"].ToString(),
+                quantveic = Int32.Parse(dt.Rows[i]["QUANTIDADETERCEIROSENVOLVIDOS"].ToString()),
+                BoEnviado = bool.Parse(dt.Rows[i]["COPIABO"].ToString()),
+                CnhEnviada = bool.Parse(dt.Rows[i]["COPIACNHENVIADA"].ToString()),
+                CompEnd = bool.Parse(dt.Rows[i]["COPIACOMPENDERECO"].ToString()),
+                Chassi = dt.Rows[i]["CHASSI"].ToString(),
+                RG = dt.Rows[i]["RG"].ToString(),
+                CPF = dt.Rows[i]["CPF"].ToString(),
+                NomeCliente = dt.Rows[i]["NOME"].ToString(),
+                Modelo = dt.Rows[i]["MODELO"].ToString(),
+                NumApolice = Int32.Parse(dt.Rows[i]["APOLICE_ID"].ToString()),
+                NumSinistro = Int32.Parse(dt.Rows[i]["CHAMADO_ID"].ToString()),
+                Placa = dt.Rows[i]["PLACA"].ToString(),
+                Status = "Em Análise",
+                DataHoraChamado = dt.Rows[i]["DATAHORAACIDENTE"].ToString(),
+                veiclocomove = bool.Parse(dt.Rows[i]["VEICULOSELOCOMOVE"].ToString())
+            };
+            list.Add(objetoList);
+            var dtant = DateTime.Parse(objetoList.DataHoraChamado);
+            var dtatu = DateTime.Now;
+            TimeSpan span = Convert.ToDateTime(dtatu) - Convert.ToDateTime(dtant);
+            var quantmin = span.Minutes;
+            
+            chamadodao.AtualizaChamado(objetoList.NumSinistro, 3, dtant, dtatu, quantmin.ToString(), 2);
+
+            return list;
+
+
+        }
     }
 }

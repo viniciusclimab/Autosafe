@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
                     {
                         if (le.GetLoginWeb(cpf, senha) == 0)
                         {
-                            return View("Home");
+                            return RedirectToAction("Index","Chamado");
                         }
                         else
                         {

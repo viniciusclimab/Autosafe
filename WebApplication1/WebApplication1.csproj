@@ -238,6 +238,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ChamadoController.cs" />
     <Compile Include="Controllers\EsqueceuSenhaServiceController.cs" />
+    <Compile Include="Controllers\GerarRelatorioOpiniaoController.cs" />
     <Compile Include="Controllers\LoginServiceController.cs" />
     <Compile Include="Controllers\LoginWebController.cs" />
     <Compile Include="Controllers\OficinaService.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Models\ChamadoEspecialista.cs" />
     <Compile Include="Models\ChamadoModel.cs" />
     <Compile Include="Models\ChamadoModelExibicao.cs" />
+    <Compile Include="Models\ChamadoOficinaExibicao.cs" />
     <Compile Include="Models\ChamadoOficinaModel.cs" />
     <Compile Include="Models\ClienteDependenteModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Models\OpiniaoModel.cs" />
     <Compile Include="Models\Servicos.cs" />
     <Compile Include="Models\SlaModel.cs" />
+    <Compile Include="Models\Teste.cs" />
     <Compile Include="Models\VeiculoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -750,6 +753,7 @@
     <Content Include="Views\Report\RelatorioAvaliacaoOficinas.cshtml" />
     <Content Include="Views\Report\ReportSlaChamados.cshtml" />
     <Content Include="Views\Report\ReportTempoChamado.cshtml" />
+    <Content Include="Views\Chamado\ListaChamadoOficina.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

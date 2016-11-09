@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace WebApplication1.Controllers
 {
     public class LoginWebController : Controller
@@ -14,13 +15,15 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string cpf = Request["cpf"].ToString();
-                string senha = Request["senha"].ToString();
-                if (!String.IsNullOrEmpty(cpf) || !String.IsNullOrEmpty(senha))
-                {
-                    Models.LoginEspecialista le = new Models.LoginEspecialista();
-                    int tamnaho = cpf.Length;
+                var msgErro = string.Empty;
+                var cpf = Request["cpf"].ToString();
+                var senha = Request["senha"].ToString();
 
+                //TRATAMENTO de primeiro request
+                if (!string.IsNullOrEmpty(cpf) || string.IsNullOrEmpty(senha))
+                {
+                    var  le = new Models.LoginEspecialista();
+                    var tamnaho = cpf.Length;
                     if (tamnaho == 11)
                     {
                         if (le.GetLoginWeb(cpf, senha) == 0)
@@ -29,27 +32,30 @@ namespace WebApplication1.Controllers
                         }
                         else
                         {
-                            return View("Error");
-                        }
+                             msgErro = "CPF ou senha inválidos favor verificar o mesmo";
+                             ViewData["msg"] = msgErro;
+                       }
                     }
                     else if(tamnaho == 14) {
                         if (le.GetOficina(cpf, senha) == 2)
                         {
-                            return View("HomeOficina");
+                            return RedirectToAction("IndexOficina", "Chamado", new {cnpj = cpf});
+
                         }
                         else
                         {
-                            return View("Error");
-                        }
+                            msgErro = "CNPJ ou senha inválidos favor verificar o mesmo";
+                            ViewData["msg"] = msgErro;
+                       }
                     }
-                    else {
-                        return View("Error");
-                    }
+                  
                 }
                 else {
-                    return View("Error");
+                    msgErro = "Dados em branco favor verificar o mesmo";
+                    ViewData["msg"] = msgErro;
+                   
                 }
-
+                return View("Index");
             }
             catch (Exception)
             {
@@ -57,76 +63,6 @@ namespace WebApplication1.Controllers
             }
          }
         // GET: LoginWeb/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: LoginWeb/Create
-        public ActionResult Logars()
-        {
-            return Logar();
-        }
-
-        // POST: LoginWeb/Create
-        [HttpPost]
-        public ActionResult Logar()
-        {
-            try
-            {
-                // TODO: Add insert logic here
-               
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: LoginWeb/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: LoginWeb/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: LoginWeb/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: LoginWeb/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
         
         public ActionResult CarregaEsqueceuSenha()
         {
@@ -143,7 +79,7 @@ namespace WebApplication1.Controllers
 
             if (msg.Equals("Senha alterada com sucesso"))
             {
-                return Logar();
+                return Index();
             }
 
             else return View("EsqueceuSenha");

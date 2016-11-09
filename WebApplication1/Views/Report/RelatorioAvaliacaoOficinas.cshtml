@@ -47,7 +47,7 @@
             Relatório de Oficinas .
         </blockquote>
         <div class="row">
-            <form class="col s12" action="@Url.Action("GerarRelatorioOficina", "Report")" method="post">
+            <form class="col s12" >
                 <div class="row col s6">
                     <label>Data Início</label>
                     <input type="date" id="dtini" name="dtini" class="datepicker">
@@ -56,50 +56,15 @@
                     <label>Data Fim</label>
                     <input type="date" id="dtfim" name="dtfim" class="datepicker">
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    Gerar Relatório
-                    <i class="material-icons">insert_chart</i>
-                </button>
+                
             </form>
+            <button class="btn waves-effect waves-light" onclick="BuscaOpiniao()">
+                Gerar Relatório
+                <i class="material-icons">insert_chart</i>
+            </button>
         </div>
     </div>
-    <div id="grid">
-        
-            @{
-                var chamados = (List<WebApplication1.Models.OficinaModel>)ViewData["Chamados"];
-                if (chamados.Count > 0)
-                {
-                    <table style="width:100%" border="0">
-                        <tr>
-                            <th>Oficina</th>
-                            <th>Nota</th>
-                            <th>Avaliação</th>
-
-                        </tr>
-                        @{ 
-                        foreach (var item in chamados)
-                        {
-                        foreach (var i in item.ListaDeOpinioes)
-
-                        {
-                        <tr>
-                            <td>@item.NomeFantasia</td>
-                            <td>@i.Nota</td>
-                            <td>@i.JustificativaNota</td>
-                        </tr>
-
-                        }
-
-
-                        }
-
-                        }
-                    </table>
-
-                    }
-                }
-        }
-                            </div>
+    <div id="divGoogleChart" style="border:2px solid #ccc;width:740px;"></div>
 
             <footer class="page-footer indigo darken-4">
                 <div class="container">
@@ -138,6 +103,67 @@
             <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
             <script src="/Content/data/js/materialize.js"></script>
             <script src="/Content/data/js/init.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+   
+
+        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+        function BuscaOpiniao()
+        {
+            var ini = document.getElementById('dtini').value;
+            var fim = document.getElementById('dtfim').value;
+
+            $.ajax({
+                url: '/api/GerarRelatorioOpiniao',
+                type: 'GET',
+                data:{ini:'25/10/2016',fim:'25/10/2016'},
+                dataType: 'json',
+                success: function (data) {
+                    drawChartCallBack(data);
+                },
+                error: function () {
+                    alert('Erro ao carregar o Google Chart');
+                }
+            });
+        }
+        
+        // Método responsável por carregar todas as informações no gráfico.
+        function drawChartCallBack(arrayBestSellingProducts) {
+                
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Produto');
+            data.addColumn('number', 'Quantidade');
+
+            for (i = 0; i < arrayBestSellingProducts.length; i++)
+            {
+                data.addRow([arrayBestSellingProducts[i].Name,
+                    arrayBestSellingProducts[i].Quantity]);
+            }
+
+            // Opções do gráfico
+            var options = {
+                'title': 'Oficinas com mais chamados',
+                'width': 740,
+                'height': 400
+            };
+
+            // Instancia o gráfico à partir de elementos na página.
+            // No caso será redenrizado em um elemento chamado 
+            // divGoogleChart que por sua vez é uma div.
+            var chart = new google.visualization.PieChart
+                (document.getElementById('divGoogleChart'));
+
+            chart.draw(data, options);
+        }
+
+     
+
+
+        </script>
+    
 
 </body>
 

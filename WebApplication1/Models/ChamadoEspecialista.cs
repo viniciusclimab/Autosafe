@@ -14,7 +14,7 @@ namespace WebApplication1.Models
             var dt = chamadodao.insChamado(objetochamado.Apolice_id, objetochamado.DocumentoCondutor, objetochamado.PartesVeic,
                 objetochamado.RuaAvenida, objetochamado.Bairro, objetochamado.Cidade, objetochamado.Numero,
                 objetochamado.veiculolocomove, objetochamado.datahorachamado, objetochamado.descchamado, objetochamado.obschamado
-                , objetochamado.quantveicenvolvidos);
+                , objetochamado.quantveicenvolvidos,1);
 
             if(dt != null)
             {
@@ -213,5 +213,32 @@ namespace WebApplication1.Models
 
 
         }
+        public List<ChamadoOficinaExibicao> ConsultaChamadoOficina(string cnpj)
+        {
+            var listaTratada = new List<ChamadoOficinaExibicao>();
+            var chamados = chamadodao.GetChamadoByOficinaCnpj(cnpj);
+            if(chamados.Rows.Count > 0)
+            {
+                for(int i = 0; i < chamados.Rows.Count; i++)
+                {
+                    var chamadoOficina = new ChamadoOficinaExibicao
+                    {
+                    NumeroDoChamado = Int32.Parse(chamados.Rows[i]["chamado_id"].ToString()),
+                    NomeCliente = chamados.Rows[i]["nome"].ToString(),
+                    CPF = chamados.Rows[i]["cpf"].ToString(),
+                    Modelo = chamados.Rows[i]["modelo"].ToString(),
+                    Placa = chamados.Rows[i]["placa"].ToString(),
+                    Chassi = chamados.Rows[i]["chassi"].ToString(),
+                    Status = chamados.Rows[i]["nomecha"].ToString(),
+                    data = chamados.Rows[i]["datahoraaberturachamado"].ToString()
+                    };
+                    listaTratada.Add(chamadoOficina);
+                }
+
+            }
+
+            return listaTratada;
+        }
+
     }
 }

@@ -1,6 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    var msg = (string)ViewData["Chamados"];
+    if (!string.IsNullOrEmpty(msg))
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>msg</strong>        </div>
+
+    }
 }
 
 
@@ -86,10 +92,10 @@
                         <form role="form" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Cpf ou CNPJ" name="cpf" type="text" maxlength="15" autofocus>
+                                    <input class="form-control" placeholder="Cpf ou CNPJ" name="cpf" type="text" maxlength="15" required  autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Senha" name="senha" type="password" maxlength="20" value="">
+                                    <input class="form-control" placeholder="Senha" name="senha" type="password" required  maxlength="20" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>

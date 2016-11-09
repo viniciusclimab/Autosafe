@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Home Oficina </title>
+    <link rel="shortcut icon" href="favicon.png">
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/Content/data/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="/Content/data/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <nav class=" indigo darken-4" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="principal.html" class="brand-logo">Auto Safe <i class="material-icons">directions_car</i></a>
+            </div>
+        </nav>
+
+
+                <div id= "grid">
+        <table style="width:100%" border="0">
+            <tr>
+                <th>Nome do cliente</th>
+                <th>CPF</th>
+                <th>Modelo</th>
+                <th>Placa</th>
+                <th>Chassi</th>
+                <th>Status do Chamado</th>
+                <th>Data do Chamado</th>
+                <th>Alterar</th>
+            </tr>
+
+
+            
+
+            @{
+                
+                var chamados = (List<WebApplication1.Models.ChamadoOficinaExibicao>)ViewData["Chamados"];
+                foreach (var item in chamados)
+                {
+                    <tr>
+                      <td >@item.NomeCliente</td>
+                      <td> @item.CPF</td>
+                      <td>@item.Modelo</td>
+                        <td>@item.Placa</td>
+                        <td>@item.Chassi</td>
+                        <td>@item.Status</td>
+                        <td>@item.data</td>
+                         <td>@Html.ActionLink("Alterar","AlterarOficina","Chamado",new {numchamado = @item.NumeroDoChamado})</td>
+                        
+                    </tr>
+                  
+                    }
+            }
+            
+        </table>
+    </div>
+
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+           
+
+        </div>
+    </div>
+
+    <footer class="page-footer indigo darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Auto Safe</h5>
+                    <p class="grey-text text-lighten-4">Serviço de Integração de Seguradora.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Configurações</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Sair</a></li>
+                        <li><a class="white-text" href="#!">Alterar Senha</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Contato</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Fale Conosco</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 <a class="blue-text text-lighten-3" href="#!"> Auto Safe </a> - Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/Content/data/js/materialize.js"></script>
+    <script src="/Content/data/js/init.js"></script>
+
+</body>
+</html>

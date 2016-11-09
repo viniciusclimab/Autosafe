@@ -17,6 +17,13 @@ namespace WebApplication1.Controllers
             return View("ListaChamados");
         }
 
+        public ActionResult IndexOficina(string cnpj)
+        {
+            var list = ce.ConsultaChamadoOficina(cnpj);
+            ViewData["Chamados"] = list;
+            return View("ListaChamadoOficina");
+        }
+
         // GET: Chamado/Details/5
         public ActionResult Detalhes()
         {
@@ -37,6 +44,16 @@ namespace WebApplication1.Controllers
             ViewData["Chamados"] = list;
             return View("AlteraChamado");
         }
+
+        public ActionResult AlterarOficina(string numchamado)
+        {
+            string id = numchamado;
+            int ids = Int32.Parse(id);
+            var list = ce.AlteraChamado(ids);
+            ViewData["Chamados"] = list;
+            return View("AlteraChamado");
+        }
+
 
         // POST: Chamado/Create
         [HttpPost]
@@ -105,47 +122,9 @@ namespace WebApplication1.Controllers
             }
         }
         // GET: Chamado/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Chamado/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Chamado/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Chamado/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

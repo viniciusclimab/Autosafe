@@ -20,18 +20,18 @@ namespace WebApplication1.DAO
         }
         public DataTable insChamado(int apolice_id, string cpfcnpj, string partesveiculosenvolvida,
             string ruaavenida, string bairro, string cidade, int numero, bool veiclocomove, DateTime datahorachamado,
-            string descchamado, string obschaamdo, int quant_veic_env)
+            string descchamado, string obschaamdo, int quant_veic_env, int oficina_id)
         {
             try
             {
                 var query = @"INSERT INTO [dbo].[Chamado]([PartesDoVeiculoColidida],[RuaAvenida],[Bairro],[Estado],[Numero]
                             ,[quantidadeterceirosenvolvidos],[veiculoselocomove],[datahoraacidente] ,[statuschamado]
                             ,[apolice_id],[descrissaochamado],[Observacao] ,[copiacnhenviada] ,[copiacompendereco]
-                            ,[copiabo],[datahoraaberturachamado],[CPFCONDUTOR])VALUES
-                             ('{0}','{1}','{2}','{3}',{4},{5},{6},{7},{8},{9},'{10}','{11}',{12},{13},{14},{15},'{16}')";
+                            ,[copiabo],[datahoraaberturachamado],[CPFCONDUTOR],oficina_id)VALUES
+                             ('{0}','{1}','{2}','{3}',{4},{5},{6},{7},{8},{9},'{10}','{11}',{12},{13},{14},{15},'{16}','{17}')";
 
                 query = string.Format(query, partesveiculosenvolvida, ruaavenida, bairro, cidade, numero, quant_veic_env, veiclocomove,
-                                      datahorachamado, 1, apolice_id, descchamado, obschaamdo, false, false, false, DateTime.Now, cpfcnpj);
+                                      datahorachamado, 1, apolice_id, descchamado, obschaamdo, false, false, false, DateTime.Now, cpfcnpj,oficina_id);
 
                 SqlHelper.ExecuteNonQuery(ConnectionString, System.Data.CommandType.Text,
                                                                 query, null);
@@ -158,5 +158,21 @@ namespace WebApplication1.DAO
                 throw new Exception();
             }
         }
+
+        public DataTable GetChamadoByOficinaCnpj(string cnpj)
+        {
+            var query = @"select cha.chamado_id,cli.nome,cli.cpf,veic.modelo,veic.placa,veic.chassi,sta.nome as nomecha,cha.datahoraaberturachamado
+                          from oficina as ofi
+                          join chamado as cha on ofi.oficina_id = cha.oficina_id  
+                          join apolice as apo on cha.apolice_id = apo.apolice_id
+                          join cliente as cli on cli.cliente_id = apo.cliente_id
+                          join veiculo as veic on veic.veiculo_id = apo.veiculo_id
+                          join StatusChamado as sta on sta.Status_id = cha.statuschamado
+                          where ofi.cnpi = '"+cnpj+ @"' and
+                          cha.statuschamado in(3,4)  order by cha.statuschamado;";
+            return SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text, query, null);
+
+        }
+
     }
 }

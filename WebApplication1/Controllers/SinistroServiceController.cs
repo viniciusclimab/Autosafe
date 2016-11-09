@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using WebApplication1.Models;
-
+using WebApplication1.DAO;
 namespace WebApplication1.Controllers
 {
     public class SinistroServiceController : ApiController
@@ -22,6 +22,17 @@ namespace WebApplication1.Controllers
                                     string veiculolocomove, string datahorachamado, string descchamado,
                                     string observacaochamado, string oficina_id, string quantterceiros)
         {
+            var cd = new ChamadosDAO();
+            try {
+        
+                /*cd.insChamado(Int32.Parse(apolice_id), documentodocondutor, partesveic,
+                    ruaavenida, bairro, cidade, Int32.Parse(numero), false, DateTime.Now, descchamado, observacaochamado, Int32.Parse(quantterceiros),
+                    Int32.Parse(oficina_id));*/
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
             return "chama nº";
 
         }

@@ -74,11 +74,10 @@
                         {
                             <td style="background-color:lightgreen" class="alert-success">@item.Prioridade</td>
                         }
-                         <td>@Html.ActionLink("Detalhes","Detalhes","Chamado",@item.NumSinistro)</td>
-                        <td>@Html.ActionLink("Alterar","Alterar","Chamado",@item.NumSinistro)</td>
-                        @if (!item.veiclocomove)
-                        {
-                        <td>Enviar Guincho</td>
+                        <td><a href="@string.Concat("http://localhost:53186/Chamado/Detalhes?Length=", @item.NumSinistro)" />Detalhes</td>
+                         <td><a href="@string.Concat("http://localhost:53186/Chamado/Alterar?Length=", @item.NumSinistro)"/>Alterar</td>
+                        @if (!item.veiclocomove) { 
+                        <td><a href="@string.Concat("http://localhost:53186/Chamado/Guincho?Length=", @item.NumSinistro)"/>Enviar Guincho</td>
                         }
                     </tr>
                   

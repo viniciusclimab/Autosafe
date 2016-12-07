@@ -120,13 +120,21 @@
                                     <textarea id="taFunilaria" class="materialize-textarea" name="taFunilaria"></textarea>
                                     <label for="taFunilaria">Insira as informações de Funilaria</label>
                                 </p>
-                            </div>
+                                
+                                @{ 
+                                    var id = ViewData["id"].ToString();
+                                }   
+                                
+                                    <input type="text" value ="@id.ToString()"style="visibility:hidden" id="numchamado" name="numchamado" />
+</div>
 
                             <div class=" row">
 
                                 <div class="input-field col s6">
-
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                     
+                                    
+                                    
+                                    <button class="btn waves-effect waves-light" type="submit" name="action" >
                                         Enviar para Oficina
                                         <i class="material-icons right">send</i>
                                     </button>

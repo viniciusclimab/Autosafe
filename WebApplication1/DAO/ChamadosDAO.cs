@@ -2,6 +2,7 @@
 using System.Web.Configuration;
 using Kernel.Persistencia;
 using System.Data;
+using System.Collections.Generic;
 namespace WebApplication1.DAO
 {
     public class ChamadosDAO
@@ -28,15 +29,15 @@ namespace WebApplication1.DAO
                             ,[quantidadeterceirosenvolvidos],[veiculoselocomove],[datahoraacidente] ,[statuschamado]
                             ,[apolice_id],[descrissaochamado],[Observacao] ,[copiacnhenviada] ,[copiacompendereco]
                             ,[copiabo],[datahoraaberturachamado],[CPFCONDUTOR],oficina_id)VALUES
-                             ('{0}','{1}','{2}','{3}',{4},{5},{6},{7},{8},{9},'{10}','{11}',{12},{13},{14},{15},'{16}','{17}')";
+                             ('{0}','{1}','{2}','{3}',{4},{5},'{6}','{7}',{8},{9},'{10}','{11}','{12}','{13}','{14}','{15}','{16}',{17})";
 
                 query = string.Format(query, partesveiculosenvolvida, ruaavenida, bairro, cidade, numero, quant_veic_env, veiclocomove,
-                                      datahorachamado, 1, apolice_id, descchamado, obschaamdo, false, false, false, DateTime.Now, cpfcnpj,oficina_id);
+                                      datahorachamado, 1, apolice_id, descchamado, "vazio", false, false, false, DateTime.Now, cpfcnpj,oficina_id);
 
                 SqlHelper.ExecuteNonQuery(ConnectionString, System.Data.CommandType.Text,
                                                                 query, null);
-                DataTable dt = SqlHelper.ExecuteDataTable(ConnectionString, System.Data.CommandType.Text, "SELECT max(chamado_id) FROM CHAMADO WHERE " +
-                   "Cpfcondutor =' " + cpfcnpj + "' and apolice_id = " + apolice_id);
+                DataTable dt = SqlHelper.ExecuteDataTable(ConnectionString, System.Data.CommandType.Text, "SELECT max(chamado_id) as chamado_id FROM CHAMADO WHERE " +
+                   " apolice_id = " + apolice_id);
                 return dt;
             }
             catch (Exception ex)
@@ -171,6 +172,89 @@ namespace WebApplication1.DAO
                           where ofi.cnpi = '"+cnpj+ @"' and
                           cha.statuschamado in(3,4)  order by cha.statuschamado;";
             return SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text, query, null);
+
+        }
+
+        public DataTable GetChamadoByApolicesId(List<int>apolicesId)
+        {
+            var where = "( ";
+            var dt = new DataTable();
+            try
+            {
+                for (int i = 0; i < apolicesId.Count; i++)
+                {
+                    where = where + apolicesId[i].ToString() + ", ";
+                }
+
+                var query = @"select 
+cha.chamado_id,
+cha.copiacnhenviada,
+cha.copiacompendereco,
+cha.copiabo,
+cha.datahoraacidente,
+cha.descrissaochamado,
+cli.nome,
+veic.modelo,
+veic.placa,
+cha.tempoguincho,
+sc.Nome as StatusChamado
+from chamado as cha
+join apolice as apo on cha.apolice_id = apo.apolice_id
+join cliente as cli on apo.cliente_id = cli.cliente_id
+join veiculo as veic on apo.veiculo_id = veic.veiculo_id
+join statuschamado as sc on sc.status_id = statuschamado
+where cha.apolice_id in " + where + " 0)";
+
+                dt = Kernel.Persistencia.SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text,
+                    query, null);
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return dt;
+
+
+        }
+
+        public DataTable GetApolicesByClienteId(int cliente_id)
+        {
+            var dt = new DataTable();
+
+            try
+            {
+                var query = @"SELECT APO. APOLICE_ID FROM CLIENTE AS CLI
+                         JOIN APOLICE AS APO ON CLI.CLIENTE_ID = APO.CLIENTE_ID 
+                         WHERE CLI.CLIENTE_ID = " + cliente_id;
+
+                dt = Kernel.Persistencia.SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text, query, null);
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return dt;
+            }
+        public DataTable GetServicosByChamado_id(int chamado_id)
+        {
+            var dt = new DataTable();
+
+            try
+            {
+                var query = @"SELECT * from chamadoservicos where chamado_id =  " + chamado_id;
+
+                dt = Kernel.Persistencia.SqlHelper.ExecuteDataTable(ConnectionString, CommandType.Text, query, null);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+
+
 
         }
 

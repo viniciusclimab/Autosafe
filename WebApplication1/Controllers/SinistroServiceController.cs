@@ -23,17 +23,21 @@ namespace WebApplication1.Controllers
                                     string observacaochamado, string oficina_id, string quantterceiros)
         {
             var cd = new ChamadosDAO();
+            var retorno = string.Empty;
             try {
+                descchamado = descchamado.Replace("_", " ");
+    
         
-                /*cd.insChamado(Int32.Parse(apolice_id), documentodocondutor, partesveic,
-                    ruaavenida, bairro, cidade, Int32.Parse(numero), false, DateTime.Now, descchamado, observacaochamado, Int32.Parse(quantterceiros),
-                    Int32.Parse(oficina_id));*/
+                    var dt = cd.insChamado(int.Parse(apolice_id), documentodocondutor, partesveic,
+                    ruaavenida, bairro, cidade, 500, false, DateTime.Now, descchamado, observacaochamado, Int32.Parse(quantterceiros),
+                    Int32.Parse(oficina_id));
+                retorno = dt.Rows[0]["chamado_id"].ToString() + " Não esqueça de enviar a copia da cnh, o Boletim de ocorrência e o B.O para atendimento@autosafe.com.br";
             }
             catch(Exception ex)
             {
                 throw;
             }
-            return "chama nº";
+            return retorno;
 
         }
     }

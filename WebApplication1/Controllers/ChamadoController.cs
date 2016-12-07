@@ -42,6 +42,7 @@ namespace WebApplication1.Controllers
             int ids = Int32.Parse(id);
             var list = ce.AlteraChamado(ids);
             ViewData["Chamados"] = list;
+            ViewData["id"] = ids;
             return View("AlteraChamado");
         }
 
@@ -56,12 +57,13 @@ namespace WebApplication1.Controllers
 
 
         // POST: Chamado/Create
-        [HttpPost]
+        
         public ActionResult EnviaOficina()
         {
             try
             {
                 var cm = new Models.ChamadoOficinaModel();
+                var num = Request["numchamado"].ToString();
                 try {
                     cm.EnvioBO = ConvertCheck(Request["inputBo"].ToString());
                 }

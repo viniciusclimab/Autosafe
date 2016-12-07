@@ -236,7 +236,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CadastrarOpiniaoService.cs" />
+    <Compile Include="Controllers\CadastrarOpiniaoServiceController.cs" />
     <Compile Include="Controllers\ChamadoController.cs" />
+    <Compile Include="Controllers\ConsultaChamadoServiceController.cs" />
     <Compile Include="Controllers\EsqueceuSenhaServiceController.cs" />
     <Compile Include="Controllers\GerarRelatorioOpiniaoController.cs" />
     <Compile Include="Controllers\LoginServiceController.cs" />
@@ -256,6 +259,7 @@
     <Compile Include="Models\ApoliceModel.cs" />
     <Compile Include="Models\Atendente.cs" />
     <Compile Include="Models\ChamadoEspecialista.cs" />
+    <Compile Include="Models\ChamadoExibicaoAplicativo.cs" />
     <Compile Include="Models\ChamadoModel.cs" />
     <Compile Include="Models\ChamadoModelExibicao.cs" />
     <Compile Include="Models\ChamadoOficinaExibicao.cs" />
